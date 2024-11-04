@@ -8,8 +8,8 @@ function Loading({ height = "75", width = "40" }) {
       width={width}
       radius={9}
       color="rgb(var(--color-primary-900))"
-      wrapperClass={{
-        displqy: "flex",
+      wrapperStyle={{
+        display: "flex",
         justifyContent: "center",
       }}
       visible={true}

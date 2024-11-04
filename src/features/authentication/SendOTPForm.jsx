@@ -5,9 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import Loading from "../../UI/Loading";
 
-function SendOTPForm({ setStep }) {
-  const [phoneNumber, setPhoneNumber] = useState("");
-
+function SendOTPForm({ setStep, phoneNumber, onChange }) {
   const { isPending, error, data, mutateAsync } = useMutation({
     mutationFn: getOtp,
   });
@@ -18,8 +16,8 @@ function SendOTPForm({ setStep }) {
       const data = await mutateAsync({ phoneNumber });
       setStep(2);
     } catch (error) {
-      // toast.error(error?.response?.data?.message); برای اینکه سرویس کاوه نگار وصل نیست
-      toast.success("کد اعتبارسنجی ارسال شد");
+      // toast.error(error?.response?.data?.message); 
+      toast.success("کد اعتبارسنجی ارسال شد");  // برای اینکه سرویس پیامکی وصل نیست
     }
   };
 
@@ -30,7 +28,7 @@ function SendOTPForm({ setStep }) {
           <TextField
             lable="شماره موبایل"
             value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onChange={onChange}
             name="phoneNumber"
           />
         </div>
