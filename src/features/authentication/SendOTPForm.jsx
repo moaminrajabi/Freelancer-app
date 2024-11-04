@@ -5,25 +5,10 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import Loading from "../../UI/Loading";
 
-function SendOTPForm({ setStep, phoneNumber, onChange }) {
-  const { isPending, error, data, mutateAsync } = useMutation({
-    mutationFn: getOtp,
-  });
-
-  const sendOTPHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const data = await mutateAsync({ phoneNumber });
-      setStep(2);
-    } catch (error) {
-      // toast.error(error?.response?.data?.message); 
-      toast.success("کد اعتبارسنجی ارسال شد");  // برای اینکه سرویس پیامکی وصل نیست
-    }
-  };
-
+function SendOTPForm({ onSubmit, isSendingOtp, phoneNumber, onChange }) {
   return (
     <div>
-      <form className="space-y-8" onSubmit={sendOTPHandler}>
+      <form className="space-y-8" onSubmit={onSubmit}>
         <div>
           <TextField
             lable="شماره موبایل"
@@ -33,7 +18,7 @@ function SendOTPForm({ setStep, phoneNumber, onChange }) {
           />
         </div>
         <div>
-          {isPending ? (
+          {isSendingOtp ? (
             <Loading />
           ) : (
             <button type="submit" className="btn btn--primary w-full">
