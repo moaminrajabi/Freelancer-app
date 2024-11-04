@@ -6,7 +6,11 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 function AuthContainer() {
-  const { isPending: isSendingOtp, mutateAsync } = useMutation({
+  const {
+    isPending: isSendingOtp,
+    mutateAsync,
+    data: otpResponse,
+  } = useMutation({
     mutationFn: getOtp,
   });
 
@@ -39,6 +43,7 @@ function AuthContainer() {
       case 2:
         return (
           <CheckOTPForm
+            otpResponse={otpResponse}
             phoneNumber={phoneNumber}
             onBack={() => setStep(1)}
             onReSendOtp={sendOTPHandler}
