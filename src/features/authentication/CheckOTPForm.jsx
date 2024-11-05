@@ -24,12 +24,18 @@ function CheckOTPForm({ phoneNumber, onBack, onReSendOtp, otpResponse }) {
     try {
       const data = await mutateAsync({ phoneNumber, otp });
       toast.success(data.data.data.message);
-      if (data.data.data.user.isActive) {
-        <p>wlcome back</p>;
-      } else {
-        navigate("/complete-profile");
+
+      console.log(data.data.data.user.role);
+
+      if (!data.data.data.user.isActive) return navigate("/complete-profile");
+      if (data.data.data.user.status !== 2) {
+        navigate("/");
+        toast.error("پروفایل شما در انتظار تایید است");
+        return;
       }
-      console.log(data.data.data.user.isActive);
+      if (data.data.data.user.role == "OWNER") return navigate("/owner");
+      if (data.data.data.user.role == "FREELANCER")
+        return navigate("/freelancer");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
