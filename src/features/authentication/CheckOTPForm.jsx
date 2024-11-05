@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { HiArrowRight } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
+import Loading from "../../UI/Loading";
 
 const RESEN_TIME = 90;
 
@@ -47,14 +48,11 @@ function CheckOTPForm({ phoneNumber, onBack, onReSendOtp, otpResponse }) {
         <button onClick={onBack}>
           <HiArrowRight className="w-6 h-6 text-secondary-500" />
         </button>
-        {otpResponse && (
-          <p>
-            {otpResponse?.message}
-            <button onClick={onBack}>
-              <CiEdit /> adsad
-            </button>
-          </p>
-        )}
+        <div>
+          <button onClick={onBack}>
+            <CiEdit style={{ display: "inline-block" }} /> ویراش شماره موبایل
+          </button>
+        </div>
         <div className="mb-4 text-secondary-500">
           {time > 0 ? (
             <p> {time} ثانیه تا ارسال مجدد کد </p>
@@ -77,7 +75,15 @@ function CheckOTPForm({ phoneNumber, onBack, onReSendOtp, otpResponse }) {
             borderRadius: "0.5rem",
           }}
         />
-        <button className="btn btn--primary w-full"> تایید </button>
+        <div>
+          {isPending ? (
+            <Loading />
+          ) : (
+            <button type="submit" className="btn btn--primary w-full">
+              تایید
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
