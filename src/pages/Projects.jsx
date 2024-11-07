@@ -1,7 +1,12 @@
 import React from "react";
+import ProjectTable from "../features/project/ProjectTable";
 
 function Projects() {
-  return <div>Projects</div>;
+  return (
+    <div>
+      <ProjectTable />
+    </div>
+  );
 }
 
 export default Projects;
