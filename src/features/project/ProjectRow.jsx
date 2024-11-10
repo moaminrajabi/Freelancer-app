@@ -1,7 +1,9 @@
 import React from "react";
-import Table from "../../UI/TAble";
+import Table from "../../UI/TableUI";
 import truncateText from "../../utils/truncateText";
 import { toPersianNumbersWithComma } from "../../utils/ToPersianNumbers";
+import { HiOutlineTrash } from "react-icons/hi";
+import { TbPencilMinus } from "react-icons/tb";
 
 function ProjectRow({ project, index }) {
   return (
@@ -28,7 +30,16 @@ function ProjectRow({ project, index }) {
           <span className="badge badge--danger">بسته</span>
         )}
       </td>
-      <td>...</td>
+      <td>
+        <div className="flex item-center gap-x-4">
+          <button>
+            <TbPencilMinus className="w-5 h-5 text-primary-900" />
+          </button>
+          <button>
+            <HiOutlineTrash className="w-5 h-5 text-error" />
+          </button>
+        </div>
+      </td>
     </Table.Row>
   );
 }

@@ -2,7 +2,9 @@ import React from "react";
 import useOwnerProject from "./useOwnerProject";
 import Loading from "../../UI/Loading";
 import Empty from "../../UI/Empty";
-import Table from "../../UI/TAble";
+import truncateText from "../../utils/truncateText";
+import { toPersianNumbersWithComma } from "../../utils/ToPersianNumbers";
+import Table from "../../UI/TableUI";
 import ProjectRow from "./ProjectRow";
 
 function ProjectTable() {
@@ -13,7 +15,7 @@ function ProjectTable() {
   if (!projects.length) return <Empty resourceName="پروژه" />;
   return (
     <Table>
-      <Table.Headre>
+      <Table.Header>
         <th>#</th>
         <th>عنوان پروژه</th>
         <th> دسته بندی </th>
@@ -23,7 +25,7 @@ function ProjectTable() {
         <th> فریلنسر </th>
         <th> وضعیت </th>
         <th> عملیلت </th>
-      </Table.Headre>
+      </Table.Header>
       <Table.Body>
         {projects.map((project, index) => (
           <ProjectRow key={project._id} project={project} index={index} />

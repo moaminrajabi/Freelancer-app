@@ -12,6 +12,8 @@ import OwnerDashboard from "./pages/OwnerDashboard";
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
 
+
+
 function App() {
   const queryClient = new QueryClient();
   return (
