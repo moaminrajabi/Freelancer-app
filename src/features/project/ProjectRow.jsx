@@ -4,6 +4,7 @@ import truncateText from "../../utils/truncateText";
 import { toPersianNumbersWithComma } from "../../utils/ToPersianNumbers";
 import { HiOutlineTrash } from "react-icons/hi";
 import { TbPencilMinus } from "react-icons/tb";
+import Modal from "../../UI/Modal";
 
 function ProjectRow({ project, index }) {
   return (
@@ -35,6 +36,7 @@ function ProjectRow({ project, index }) {
           <button>
             <TbPencilMinus className="w-5 h-5 text-primary-900" />
           </button>
+          <Modal open={true}>This is modal</Modal>
           <button>
             <HiOutlineTrash className="w-5 h-5 text-error" />
           </button>
