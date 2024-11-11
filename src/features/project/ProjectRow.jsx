@@ -5,8 +5,10 @@ import { toPersianNumbersWithComma } from "../../utils/ToPersianNumbers";
 import { HiOutlineTrash } from "react-icons/hi";
 import { TbPencilMinus } from "react-icons/tb";
 import Modal from "../../UI/Modal";
+import { useState } from "react";
 
 function ProjectRow({ project, index }) {
+  const [isEditOpen, setIsEditOpen] = useState(false);
   return (
     <Table.Row>
       <td>{index + 1}</td>
@@ -33,10 +35,16 @@ function ProjectRow({ project, index }) {
       </td>
       <td>
         <div className="flex item-center gap-x-4">
-          <button>
+          <button onClick={() => setIsEditOpen(true)}>
             <TbPencilMinus className="w-5 h-5 text-primary-900" />
           </button>
-          <Modal open={true}>This is modal</Modal>
+          <Modal
+            open={isEditOpen}
+            title="modal title"
+            onClose={() => setIsEditOpen(false)}
+          >
+            This is modal
+          </Modal>
           <button>
             <HiOutlineTrash className="w-5 h-5 text-error" />
           </button>
