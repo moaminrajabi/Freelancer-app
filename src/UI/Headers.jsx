@@ -5,7 +5,7 @@ function Headers() {
   const { data } = useUser();
   console.log(data);
 
-  return <div className="bg-secondary-0 py-4 px-8">App header</div>;
+  return <div className="bg-secondary-0 py-4 px-8">App Header</div>;
 }
 
 export default Headers;
