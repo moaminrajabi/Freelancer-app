@@ -5,7 +5,7 @@ export default function useOutSideClick(handler, lisenCapturing = true) {
 
   useEffect(() => {
     function handleClick(e) {
-      if (ref.current && !ref.current.contains(e.target.value)) {
+      if (ref.current && !ref.current.contains(e.target)) {
         handler();
       }
     }
