@@ -5,16 +5,15 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import Loading from "../../UI/Loading";
 
-function SendOTPForm({ onSubmit, isSendingOtp, phoneNumber, onChange }) {
+function SendOTPForm({ onSubmit, isSendingOtp, register }) {
   return (
     <div>
       <form className="space-y-8" onSubmit={onSubmit}>
         <div>
           <TextField
             lable="شماره موبایل"
-            value={phoneNumber}
-            onChange={onChange}
             name="phoneNumber"
+            register={register}
           />
         </div>
         <div>

@@ -3,7 +3,7 @@ import TextField from "../../UI/TextField";
 import { useForm } from "react-hook-form";
 
 function CreateProjectForm() {
-  const [title, serTitle] = useState("");
+  // const [title, serTitle] = useState("");
   const {
     register,
     formState: { errors },
@@ -15,7 +15,7 @@ function CreateProjectForm() {
   };
 
   return (
-    <form action="" onSubmit={handleSubmit(onSubmit)}>
+    <form action="" className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
       <TextField
         lable="عنوان پروژه"
         name="title"
@@ -24,7 +24,37 @@ function CreateProjectForm() {
         validationSchema={{
           required: "عنوان ضروری است",
           minLength: {
-            value: 10,
+            value: 6,
+            message: "عنوان نامعتبر",
+          },
+        }}
+        errors={errors}
+      />
+
+      <TextField
+        lable="توضیحات پروژه"
+        name="description"
+        register={register}
+        required
+        validationSchema={{
+          required: "توضیحات ضروری است",
+          minLength: {
+            value: 12,
+            message: "عنوان نامعتبر",
+          },
+        }}
+        errors={errors}
+      />
+
+      <TextField
+        lable="بودجه"
+        name="budget"
+        register={register}
+        required
+        validationSchema={{
+          required: " تعیین بودجه ضروری است  ",
+          minLength: {
+            value: 5,
             message: "عنوان نامعتبر",
           },
         }}
