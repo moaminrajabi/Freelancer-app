@@ -1,6 +1,6 @@
 import React from "react";
-import ProjectTable from "../features/project/ProjectTable";
-import ProjectsHeader from "../features/project/ProjectsHeader";
+import ProjectTable from "../features/projects/ProjectTable";
+import ProjectsHeader from "../features/projects/ProjectsHeader";
 
 function Projects() {
   return (
