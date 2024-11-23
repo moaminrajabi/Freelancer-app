@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import TextField from "../../UI/TextField";
 import { useForm } from "react-hook-form";
+import RHFselect from "../../UI/RHFselect";
+import { TagsInput } from "react-tag-input-component";
 
 function CreateProjectForm() {
   // const [title, serTitle] = useState("");
@@ -13,6 +15,7 @@ function CreateProjectForm() {
   const onSubmit = (data) => {
     console.log(data);
   };
+  const [tags, setTags] = useState([]);
 
   return (
     <form action="" className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
@@ -60,6 +63,17 @@ function CreateProjectForm() {
         }}
         errors={errors}
       />
+      <RHFselect
+        label="دسته بندی"
+        required
+        name="category"
+        register={register}
+        options={[]}
+      />
+      <div>
+        <label className="mt-4 pb-2 block text-slate-700"> تگ ها </label>
+        <TagsInput value={tags} onChange={setTags} name="tags" />
+      </div>
       <button type="submit" className="btn btn--primary w-full">
         تایید
       </button>
