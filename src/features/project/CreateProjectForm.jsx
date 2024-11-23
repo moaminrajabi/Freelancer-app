@@ -3,6 +3,7 @@ import TextField from "../../UI/TextField";
 import { useForm } from "react-hook-form";
 import RHFselect from "../../UI/RHFselect";
 import { TagsInput } from "react-tag-input-component";
+import DatePikerField from "../../UI/DatePikerField";
 
 function CreateProjectForm() {
   // const [title, serTitle] = useState("");
@@ -16,6 +17,7 @@ function CreateProjectForm() {
     console.log(data);
   };
   const [tags, setTags] = useState([]);
+  const [date, setDate] = useState(new Date());
 
   return (
     <form action="" className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
@@ -74,6 +76,7 @@ function CreateProjectForm() {
         <label className="mt-4 pb-2 block text-slate-700"> تگ ها </label>
         <TagsInput value={tags} onChange={setTags} name="tags" />
       </div>
+      <DatePikerField date={date} setDate={setDate} label="ددلاین" />
       <button type="submit" className="btn btn--primary w-full">
         تایید
       </button>
