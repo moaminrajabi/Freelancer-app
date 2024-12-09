@@ -5,11 +5,15 @@ export function getOtp(data) {
 }
 
 export function checkOtp(data) {
+  console.log(data);
+
   return http.post("/user/check-otp", data).then(({ data }) => data.data);
 }
 
-export function CompleteProfile(data) {
-  return http.post("/user/complete-profile", data);
+export function completeProfile(data) {
+  return http
+    .post("/user/complete-profile", data)
+    .then(({ data }) => data.data);
 }
 
 export function getUser() {

@@ -1,21 +1,23 @@
 import React from "react";
 
 function TextField({
-  lable,
+  label,
   name,
   register,
   validationSchema,
   type = "text",
   required,
   errors,
+  defaultValue,
 }) {
   return (
     <div>
       <label className="mb-2 block text-secondary-700" htmlFor={name}>
-        {lable} {required && <span className="text-error mt-10">*</span>}
+        {label} {required && <span className="text-error mt-10">*</span>}
       </label>
       <input
         {...register(name, validationSchema)}
+        defaultValue={defaultValue}
         id={name}
         className="textField__input"
         type={type}

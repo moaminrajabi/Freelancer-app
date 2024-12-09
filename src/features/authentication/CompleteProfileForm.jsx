@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import TextField from "../../UI/TextField";
+import TextField from "../../ui/TextField";
 import RadioInput from "../../UI/RadioInput";
 import { useMutation } from "@tanstack/react-query";
-import { CompleteProfile } from "../../services/authService";
+import { completeProfile } from "../../services/authService";
 import toast from "react-hot-toast";
-import Loading from "../../UI/Loading";
+import Loading from "../../ui/Loading";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import RadioGroup from "../../UI/RadioGroup";
@@ -22,7 +22,7 @@ function CompleteProfileForm() {
   const navigate = useNavigate();
 
   const { isPending, mutateAsync } = useMutation({
-    mutationFn: CompleteProfile,
+    mutationFn: completeProfile,
   });
 
   const onSubmit = async () => {
@@ -49,7 +49,7 @@ function CompleteProfileForm() {
       <div className="w-full sm:max-w-sm ">
         <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
           <TextField
-            lable="نام و نام خانوادگی"
+            label="نام و نام خانوادگی"
             name="name"
             // value={name}
             // onChange={(e) => setName(e.target.value)}
@@ -60,7 +60,7 @@ function CompleteProfileForm() {
             errors={errors}
           />
           <TextField
-            lable="ایمیل"
+            label="ایمیل"
             name="email"
             // value={email}
             // onChange={(e) => setEmail(e.target.value)}
@@ -69,8 +69,8 @@ function CompleteProfileForm() {
               required: "ایمیل را وارد کنید",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "ایمیل نامعتبر است"
-              }
+                message: "ایمیل نامعتبر است",
+              },
             }}
             errors={errors}
           />

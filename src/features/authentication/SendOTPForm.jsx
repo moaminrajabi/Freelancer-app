@@ -1,21 +1,16 @@
-import React, { useState } from "react";
-import TextField from "../../UI/TextField";
-import { getOtp } from "../../services/authService";
-import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import Loading from "../../UI/Loading";
+import TextField from "../../ui/TextField";
+import Loading from "../../ui/Loading";
 
-function SendOTPForm({ onSubmit, isSendingOtp, register }) {
+function SendOTPForm({ onSubmit, isSendingOtp, register, defaultValue }) {
   return (
     <div>
-      <form className="space-y-8" onSubmit={onSubmit}>
-        <div>
-          <TextField
-            lable="شماره موبایل"
-            name="phoneNumber"
-            register={register}
-          />
-        </div>
+      <form className="space-y-10" onSubmit={onSubmit}>
+        <TextField
+          label="شماره موبایل"
+          name="phoneNumber"
+          register={register}
+          defaultValue="09033809213"
+        />
         <div>
           {isSendingOtp ? (
             <Loading />
@@ -29,5 +24,4 @@ function SendOTPForm({ onSubmit, isSendingOtp, register }) {
     </div>
   );
 }
-
 export default SendOTPForm;
