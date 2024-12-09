@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Headers from "./Headers";
 import SideBar from "./SideBar";
 
+
 function AppLayout() {
   return (
     <div className="grid h-screen grid-rows-[auto_1fr] grid-cols-[15rem_1fr] ">
