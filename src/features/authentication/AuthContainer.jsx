@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 function AuthContainer() {
   const navigate = useNavigate();
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const { handleSubmit, register, getValues } = useForm();
   const { user } = useUser();
 

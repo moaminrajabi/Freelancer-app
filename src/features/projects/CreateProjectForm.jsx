@@ -1,87 +1,118 @@
-import React, { useState } from "react";
-import TextField from "../../UI/TextField";
-import { useForm } from "react-hook-form";
-import RHFselect from "../../UI/RHFselect";
 import { TagsInput } from "react-tag-input-component";
-import DatePikerField from "../../UI/DatePikerField";
-import useCategories from "../../hooks/useCategoris";
+import RHFSelect from "../../ui/RHFSelect";
+import TextField from "../../ui/TextField";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import DatePickerField from "../../ui/DatePickerField";
+import useCategories from "../../hooks/useCategories";
 import useCreateProject from "./useCreateProject";
-import Loading from "../../UI/Loading";
+import Loading from "../../ui/Loading";
+import useEditProject from "./useEditProject";
 
-function CreateProjectForm({ onclose }) {
-  // const [title, serTitle] = useState("");
+function CreateProjectForm({ onClose, projectToEdit = {} }) {
+  const { _id: editId } = projectToEdit;
+  const isEditSession = Boolean(editId);
+
+  const {
+    title,
+    description,
+    budget,
+    category,
+    deadline,
+    tags: prevTags,
+  } = projectToEdit;
+  let editValues = {};
+  if (isEditSession) {
+    editValues = {
+      title,
+      description,
+      budget,
+      category: category._id,
+    };
+  }
+
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm();
-  const [tags, setTags] = useState([]);
-  const [date, setDate] = useState(new Date());
+  } = useForm({ defaultValues: editValues });
+
+  const [tags, setTags] = useState(prevTags || []);
+  const [date, setDate] = useState(new Date(deadline || ""));
   const { categories } = useCategories();
   const { isCreating, createProject } = useCreateProject();
+  const { editProject, isEditing } = useEditProject();
 
   const onSubmit = (data) => {
     const newProject = {
       ...data,
+      deadline: new Date(date).toISOString(),
       tags,
-      deadline: new Date(date).toISOString,
     };
-    createProject(newProject, {
-      onSuccess: () => {
-        onclose();
-        reset();
-      },
-    });
+
+    if (isEditSession) {
+      editProject(
+        { id: editId, newProject },
+        {
+          onSuccess: () => {
+            onClose();
+            reset();
+          },
+        }
+      );
+    } else {
+      createProject(newProject, {
+        onSuccess: () => {
+          onClose();
+          reset();
+        },
+      });
+    }
   };
 
   return (
-    <form action="" className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
+    <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
       <TextField
-        lable="عنوان پروژه"
+        label="عنوان"
         name="title"
         register={register}
         required
         validationSchema={{
           required: "عنوان ضروری است",
           minLength: {
-            value: 6,
-            message: "عنوان نامعتبر",
+            value: 10,
+            message: "حداقل 10 کاراکتر را وارد کنید",
           },
         }}
         errors={errors}
       />
-
       <TextField
-        lable="توضیحات پروژه"
+        label="توضیحات"
         name="description"
         register={register}
         required
         validationSchema={{
           required: "توضیحات ضروری است",
           minLength: {
-            value: 12,
-            message: "عنوان نامعتبر",
+            value: 15,
+            message: "حداقل 15 کاراکتر را وارد کنید",
           },
         }}
         errors={errors}
       />
-
       <TextField
-        lable="بودجه"
+        label="بودجه"
         name="budget"
+        type="number"
         register={register}
         required
         validationSchema={{
-          required: " تعیین بودجه ضروری است  ",
-          minLength: {
-            value: 5,
-            message: "عنوان نامعتبر",
-          },
+          required: "بودجه ضروری است",
         }}
         errors={errors}
       />
-      <RHFselect
+      <RHFSelect
         label="دسته بندی"
         required
         name="category"
@@ -89,12 +120,12 @@ function CreateProjectForm({ onclose }) {
         options={categories}
       />
       <div>
-        <label className="mt-4 pb-2 block text-slate-700"> تگ ها </label>
+        <label className="mb-2 block text-secondary-700">تگ</label>
         <TagsInput value={tags} onChange={setTags} name="tags" />
       </div>
-      <DatePikerField date={date} setDate={setDate} label="ددلاین" />
-      <div className="mt-8">
-        {isCreating ? (
+      <DatePickerField date={date} setDate={setDate} label="ددلاین" />
+      <div className="!mt-8">
+        {isCreating || isEditing ? (
           <Loading />
         ) : (
           <button type="submit" className="btn btn--primary w-full">
@@ -105,5 +136,4 @@ function CreateProjectForm({ onclose }) {
     </form>
   );
 }
-
 export default CreateProjectForm;

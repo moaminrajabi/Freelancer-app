@@ -5,8 +5,6 @@ export function getOtp(data) {
 }
 
 export function checkOtp(data) {
-  console.log(data);
-
   return http.post("/user/check-otp", data).then(({ data }) => data.data);
 }
 
@@ -18,4 +16,19 @@ export function completeProfile(data) {
 
 export function getUser() {
   return http.get("/user/profile").then(({ data }) => data.data);
+}
+
+export function logoutApi() {
+  return http.post("/user/logout").then(({ data }) => data.data);
+}
+
+export function getUsersApi() {
+  return http.get("/admin/user/list").then(({ data }) => data.data);
+}
+
+export function changeUserStatusApi({ userId, data }) {
+  // data => {status:0, 1, 2}
+  return http
+    .patch(`/admin/user/verify/${userId}`, data)
+    .then(({ data }) => data.data);
 }
